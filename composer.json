@@ -1,4 +1,9 @@
-{
+{   
+    "name":"Banana task",
+    "description": "Journey steps",
+    "autoload": {
+        "psr-4": {"App\\": "app/"}
+    },        
     "require": {
         "symfony/var-dumper": "^5.2"
     }
