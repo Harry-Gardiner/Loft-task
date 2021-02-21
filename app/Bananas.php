@@ -33,5 +33,14 @@ $toPlaces = array_column($jsonData, 'to');
 // get starting location of Bananas
 $start = array_diff($fromPlaces,$toPlaces);
 
-dump($start);
+// Get starting object key
+$startObject = array_search($start[1], array_column($jsonData, 'from'));  // returns 1 
+
+// Create new result array with starting object
+$orderedArray = [$jsonData[$startObject]];
+
+// Remove start from data array before we loop
+array_splice($jsonData, $startObject, 1);
+
+dump($jsonData);
 
