@@ -30,5 +30,8 @@ $jsonData = json_decode($json, true);
 $fromPlaces = array_column($jsonData, 'from');
 $toPlaces = array_column($jsonData, 'to');
 
-dump($fromPlaces, $toPlaces);
+// get starting location of Bananas
+$start = array_diff($fromPlaces,$toPlaces);
+
+dump($start);
 
