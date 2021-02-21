@@ -42,5 +42,21 @@ $orderedArray = [$jsonData[$startObject]];
 // Remove start from data array before we loop
 array_splice($jsonData, $startObject, 1);
 
-dump($jsonData);
+//loop and sort
+// $number = 4;
+while (sizeof($jsonData) > 0) {
+    // dump($jsonData);
+    foreach ($jsonData as $key => $value) {
+        if ($value["from"] === end($orderedArray)["to"]) {
+            array_push($orderedArray, $jsonData[$key]) ;   
+            array_splice($jsonData, $key, 1);
+            break;
+        }
+    }
+    // dump($jsonData);
+};
+
+
+
+dump($orderedArray);
 
