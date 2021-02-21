@@ -43,19 +43,18 @@ $orderedArray = [$jsonData[$startObject]];
 array_splice($jsonData, $startObject, 1);
 
 //loop and sort
-// $number = 4;
 while (sizeof($jsonData) > 0) {
-    // dump($jsonData);
+    // loop over data
     foreach ($jsonData as $key => $value) {
+        //for each object check if "from" value is the same as the last "to" value in the new ordered array 
         if ($value["from"] === end($orderedArray)["to"]) {
-            array_push($orderedArray, $jsonData[$key]) ;   
+            //If true, 1) push object into new ordered array and 2) remove object from original array
+            array_push($orderedArray, $jsonData[$key]);   
             array_splice($jsonData, $key, 1);
             break;
         }
     }
-    // dump($jsonData);
 };
-
 
 
 dump($orderedArray);
