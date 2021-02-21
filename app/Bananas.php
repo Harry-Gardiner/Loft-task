@@ -26,24 +26,9 @@ $json = file_get_contents('./testdata.json');
 //Decode JSON into PHP array
 $jsonData = json_decode($json, true);
 
-// $Banana = new Bananas($jsonData);
-// dump(sort($Banana->getJourneyData()));
-// dump($Banana->getJourneyData());
+// get array of all "from" and "to" values
+$fromPlaces = array_column($jsonData, 'from');
+$toPlaces = array_column($jsonData, 'to');
 
-// dump($jsonData[0]["from"] === $jsonData[3]["to"]);
-
-function cmp($a, $b)
-{
-    if($a["to"] === $b["from"]){
-        return 1;
-    }
-    return 0;
-}
-
-// usort($jsonData, "cmp");
-
-usort($jsonData, "cmp");
-dump($jsonData);
-
-
+dump($fromPlaces, $toPlaces);
 
