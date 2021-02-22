@@ -9,6 +9,7 @@ class Bananas
     private $toPlaces;
     private $fromPlaces;
     private $startLocation;
+    private $orderedArray = [];
 
     public function __construct($json)
     {
@@ -46,6 +47,17 @@ class Bananas
         $startIndex = array_search($start[1], array_column($this->journeyData, 'from'));
         return $this->startLocation = $this->journeyData[$startIndex];
     }
+
+    public function setOrderdArray() : void
+    {
+        array_push($this->orderedArray, $this->startLocation);
+    }
+
+    public function getOrderdArray() : array
+    {
+       return $this->orderedArray; 
+    }
+
 }
 
 $json = file_get_contents('./testdata.json');
@@ -59,6 +71,9 @@ $Banana->setToPlaces();
 $Banana->getToPlaces();
 // Get start location array 
 $Banana->findStartingLocation();
+// Update orderd array with starting destination
+$Banana->setOrderdArray();
+dump($Banana->getOrderdArray());
 
 
 // Read JSON file
