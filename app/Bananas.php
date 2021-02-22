@@ -6,56 +6,66 @@ class Bananas
 {
 
     private $journeyData;
+    private $toPlaces;
+    private $fromPlaces;
 
     public function __construct($json)
     {
-        $this->journeyData = $json;
+        $this->journeyData = json_decode($json, true);
     }
 
-    public function getJourneyData()
+    public function getJourneyData() : array
     {
         return $this->journeyData;
     }
 
+   
+
 
 }
 
-// Read JSON file
 $json = file_get_contents('./testdata.json');
+$Banana = new Bananas($json);
+$Banana->getJourneyData();
+
+
+
+// Read JSON file
+//$json = file_get_contents('./testdata.json');
 
 //Decode JSON into PHP array
-$jsonData = json_decode($json, true);
+//$jsonData = json_decode($json, true);
 
 // get array of all "from" and "to" values
-$fromPlaces = array_column($jsonData, 'from');
-$toPlaces = array_column($jsonData, 'to');
+//$fromPlaces = array_column($jsonData, 'from');
+//$toPlaces = array_column($jsonData, 'to');
 
 // get starting location of Bananas
-$start = array_diff($fromPlaces,$toPlaces);
+//$start = array_diff($fromPlaces,$toPlaces);
 
 // Get starting object key
-$startObject = array_search($start[1], array_column($jsonData, 'from'));  // returns 1 
+//$startObject = array_search($start[1], array_column($jsonData, 'from'));  // returns 1 
 
 // Create new result array with starting object
-$orderedArray = [$jsonData[$startObject]];
+//$orderedArray = [$jsonData[$startObject]];
 
 // Remove start from data array before we loop
-array_splice($jsonData, $startObject, 1);
+//array_splice($jsonData, $startObject, 1);
 
 //loop and sort
-while (sizeof($jsonData) > 0) {
-    // loop over data
-    foreach ($jsonData as $key => $value) {
-        //for each object check if "from" value is the same as the last "to" value in the new ordered array 
-        if ($value["from"] === end($orderedArray)["to"]) {
-            //If true, 1) push object into new ordered array and 2) remove object from original array
-            array_push($orderedArray, $jsonData[$key]);   
-            array_splice($jsonData, $key, 1);
-            break;
-        }
-    }
-};
+// while (sizeof($jsonData) > 0) {
+//     // loop over data
+//     foreach ($jsonData as $key => $value) {
+//         //for each object check if "from" value is the same as the last "to" value in the new ordered array 
+//         if ($value["from"] === end($orderedArray)["to"]) {
+//             //If true, 1) push object into new ordered array and 2) remove object from original array
+//             array_push($orderedArray, $jsonData[$key]);   
+//             array_splice($jsonData, $key, 1);
+//             break;
+//         }
+//     }
+// };
 
 
-dump($orderedArray);
+
 
