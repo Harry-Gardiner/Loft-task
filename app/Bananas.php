@@ -58,6 +58,11 @@ class Bananas
        return $this->orderedArray; 
     }
 
+    public function removeStartFromData()
+    {
+        $int = array_search($this->startLocation,$this->journeyData);
+        array_splice($this->journeyData, $int, 1);
+    }
 }
 
 $json = file_get_contents('./testdata.json');
@@ -73,7 +78,12 @@ $Banana->getToPlaces();
 $Banana->findStartingLocation();
 // Update orderd array with starting destination
 $Banana->setOrderdArray();
-dump($Banana->getOrderdArray());
+$Banana->getOrderdArray();
+// Remove 1st item from data before its looped
+$Banana->removeStartFromData();
+dump($Banana->getJourneyData());
+
+
 
 
 // Read JSON file
