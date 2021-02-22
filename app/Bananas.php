@@ -8,6 +8,7 @@ class Bananas
     private $journeyData;
     private $toPlaces;
     private $fromPlaces;
+    private $startLocation;
 
     public function __construct($json)
     {
@@ -39,7 +40,12 @@ class Bananas
         return $this->toPlaces;
     }
 
-
+    public function findStartingLocation() : array
+    {
+        $start = array_diff($this->fromPlaces,$this->toPlaces);
+        $startIndex = array_search($start[1], array_column($this->journeyData, 'from'));
+        return $this->startLocation = $this->journeyData[$startIndex];
+    }
 }
 
 $json = file_get_contents('./testdata.json');
@@ -50,7 +56,9 @@ $Banana->setFromPlaces();
 $Banana->getFromPlaces();
 // Get array of "to" values
 $Banana->setToPlaces();
-dump($Banana->getToPlaces());
+$Banana->getToPlaces();
+// Get start location array 
+$Banana->findStartingLocation();
 
 
 // Read JSON file
