@@ -63,6 +63,22 @@ class Bananas
         $int = array_search($this->startLocation,$this->journeyData);
         array_splice($this->journeyData, $int, 1);
     }
+
+    public function loopAndOrder()
+    {
+        while (sizeof($this->journeyData) > 0) {
+            // loop over data
+            foreach ($this->journeyData as $key => $value) {
+                //for each object check if "from" value is the same as the last "to" value in the new ordered array 
+                if ($value["from"] === end($this->orderedArray)["to"]) {
+                    //If true, 1) push object into new ordered array and 2) remove object from original array
+                    array_push($this->orderedArray, $this->journeyData[$key]);   
+                    array_splice($this->journeyData, $key, 1);
+                    break;
+                }
+            }
+        };
+    }
 }
 
 $json = file_get_contents('./testdata.json');
@@ -81,7 +97,9 @@ $Banana->setOrderdArray();
 $Banana->getOrderdArray();
 // Remove 1st item from data before its looped
 $Banana->removeStartFromData();
-dump($Banana->getJourneyData());
+// Loop over journey data and pass items in correct order to orderedArray
+$Banana->loopAndOrder();
+dump($Banana->getOrderdArray());
 
 
 
