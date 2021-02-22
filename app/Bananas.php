@@ -10,6 +10,7 @@ class Bananas
     private $fromPlaces;
     private $startLocation;
     private $orderedArray = [];
+    private $outputJson;
 
     public function __construct($json)
     {
@@ -77,7 +78,20 @@ class Bananas
                     break;
                 }
             }
-        };
+        }
+    }
+
+    public function outputJson() 
+    {
+        // get all "to" destinations in correct order
+        $toDestinations = array_column($this->orderedArray, 'to');
+        array_unshift($toDestinations, $this->startLocation['from']);
+        $this->outputJson = json_encode($toDestinations, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function getOutputJson()
+    {
+        return $this->outputJson;
     }
 }
 
@@ -99,14 +113,16 @@ $Banana->getOrderdArray();
 $Banana->removeStartFromData();
 // Loop over journey data and pass items in correct order to orderedArray
 $Banana->loopAndOrder();
-dump($Banana->getOrderdArray());
+// Take orderdArray and get all "to" values and return these as an array. Prepend start "from" destination to array. Return array as JSON, req Unicode due to characters. 
+$Banana->outputJson();
+dump($Banana->getOutputJson());
 
 
 
-
+// LOGIC
 // Read JSON file
-//$json = file_get_contents('./testdata.json');
-
+// $json = file_get_contents('./testdata.json');
+// dump($json);
 //Decode JSON into PHP array
 //$jsonData = json_decode($json, true);
 
