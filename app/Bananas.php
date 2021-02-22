@@ -29,15 +29,28 @@ class Bananas
         return $this->fromPlaces;
     }
 
+    public function setToPlaces() : void
+    {
+        $this->toPlaces = array_column($this->journeyData, 'to');
+    }
+    
+    public function getToPlaces() : array
+    {
+        return $this->toPlaces;
+    }
+
 
 }
 
 $json = file_get_contents('./testdata.json');
 $Banana = new Bananas($json);
 $Banana->getJourneyData();
+// Get array of "from" values
 $Banana->setFromPlaces();
 $Banana->getFromPlaces();
-
+// Get array of "to" values
+$Banana->setToPlaces();
+dump($Banana->getToPlaces());
 
 
 // Read JSON file
