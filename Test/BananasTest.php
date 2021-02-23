@@ -1,5 +1,7 @@
 <?php;
 
+require_once __DIR__ . '/composer/autoload_real.php';
+
 use PHPUnit\Framework\TestCase;
 use App\Bananas;
 

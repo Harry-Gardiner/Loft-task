@@ -1,7 +1,5 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
-
 class Bananas
 {
 
@@ -115,11 +113,11 @@ $Banana->removeStartFromData();
 $Banana->loopAndOrder();
 // Take orderdArray and get all "to" values and return these as an array. Prepend start "from" destination to array. Return array as JSON, req Unicode due to characters. 
 $Banana->outputJson();
-dump($Banana->getOutputJson());
+var_dump($Banana->getOutputJson());
 
 
 
-// LOGIC
+// LOGIC BEFORE PASSING INTO CLASS
 // Read JSON file
 // $json = file_get_contents('./testdata.json');
 // dump($json);
